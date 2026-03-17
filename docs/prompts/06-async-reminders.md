@@ -1,40 +1,35 @@
 <REUSABLE INSTRUCTION BLOCK>
 
 Task:
-Create `docs/architecture/05-auth-security.md`.
+Create `docs/architecture/06-async-reminders.md`.
 
 Inputs:
-- `docs/architecture/00-stack-decision.md`
 - `docs/architecture/01-system-overview.md`
 - `docs/architecture/02-domain-model.md`
 - `docs/architecture/03-api-design.md`
+- `docs/architecture/05-auth-security.md`
 
 Goal:
-Design authentication, authorization, and baseline security for the MVP.
+Design the reminders and notifications subsystem for the MVP.
 
-Requirements:
-1. Recommend a concrete auth approach compatible with the locked stack and Azure deployment
-2. Define:
-   - user identity model
-   - session/token model
-   - frontend auth flow
-   - backend auth validation flow
-3. Define authorization rules:
-   - trip owner
-   - editor
-   - viewer
-4. Define invitation and trip-sharing security model
-5. Define secret handling strategy using Azure Key Vault
-6. Define basic security controls:
-   - input validation
-   - rate limiting
-   - CORS
-   - CSRF assumptions
-   - secure headers
-   - audit logging for critical actions
-7. Define privacy and data exposure rules for shared trips
-8. Call out anything intentionally deferred from MVP
+The document must include:
+1. What kinds of reminders exist in MVP
+2. Which entities can create reminders
+3. Scheduling model
+4. Service Bus usage model
+   - queue/topic choice
+   - message shape
+   - retry strategy
+   - poison/dead-letter handling assumptions
+5. Worker responsibilities in Azure Container Apps
+6. Delivery channels
+   - email now
+   - in-app notification later if deferred
+7. Idempotency and duplicate suppression
+8. Failure handling and observability
+9. Data model implications
+10. MVP simplifications
 
 Also include:
-- a threat checklist for the MVP
-- implementation guardrails for backend and frontend agents
+- one end-to-end reminder flow
+- a section called “What remains synchronous in the API and what is queued”
