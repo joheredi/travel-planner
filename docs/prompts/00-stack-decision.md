@@ -15,7 +15,7 @@ The document must include:
 3. Explicitly rejected alternatives and why
    - Next.js full-stack
    - .NET backend
-   - MongoDB
+   - MongoDB / Azure DocumentDB
    - Azure App Service instead of Azure Container Apps
    - self-hosted auth
    - Kubernetes/AKS
