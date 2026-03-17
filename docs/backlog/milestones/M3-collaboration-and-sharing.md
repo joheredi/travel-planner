@@ -30,11 +30,12 @@ Turn the single-owner planning workspace into a shared trip hub by adding role-b
 ## Implementation slices
 
 1. add `TripMember` management endpoints and owner-only sharing workflows
-2. thread owner/editor/viewer checks through all existing trip modules
-3. ship checklists and checklist templates
-4. ship notes and links
-5. ship budget entries and trip totals
-6. finish overview and navigation states for a shared trip workspace
+2. establish the shared backend policy layer for owner/editor/viewer checks across existing trip modules
+3. ship the sharing route and common shell-level role-aware affordances for existing routes
+4. ship checklists and checklist templates, including their feature-local role-aware states
+5. ship notes and links, including their feature-local role-aware states
+6. ship budget entries and trip totals, including their feature-local role-aware states
+7. finish overview and navigation states for a shared trip workspace
 
 ## Out-of-scope items
 
@@ -54,6 +55,14 @@ Turn the single-owner planning workspace into a shared trip hub by adding role-b
 - security and sharing rules from `docs/architecture/05-auth-security.md`
 - page and authorization-aware UI rules from `docs/architecture/04-frontend-architecture.md`
 - budget, checklist, notes, and links boundaries from `docs/architecture/01-system-overview.md` and the PRD
+
+## Dependency notes for execution
+
+- `M2` traveler, itinerary, reservation, and overview routes start from an owner-led baseline.
+- `B014` establishes the shared backend membership and authorization foundation that all M3 feature slices depend on.
+- `B015` is limited to the sharing route and common role-aware shell/navigation affordances for the existing M1/M2 routes.
+- `B016`, `B018`, and `B019` do not need to wait for all of `B015` to finish; they own the feature-local role-aware affordances for their own routes and controls.
+- `B020` should only start after the overview baseline from `B013` and the collaborative content slices are in place.
 
 ## Completion criteria
 

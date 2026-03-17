@@ -59,6 +59,10 @@ Make the MVP operationally complete by adding asynchronous reminders and the dep
 - Azure deployment and release-order rules from `docs/architecture/07-azure-deployment.md`
 - observability and release gate expectations from `docs/architecture/08-observability-testing.md`
 
+Execution note:
+
+- `B009` must already provide the shared-dev worker deployment scaffold plus the baseline Azure observability resources before `B021`-`B024` begin.
+
 ## Completion criteria
 
 - owners and editors can create, update, cancel, and list reminders for itinerary items, reservations, and checklist items
@@ -75,3 +79,4 @@ Make the MVP operationally complete by adding asynchronous reminders and the dep
 - Async reminders are the highest operational-risk part of the MVP. Duplicate suppression, idempotency, and dead-letter visibility are mandatory, not optional polish.
 - Queue timing and deployment ordering can create subtle failures if migrations, API changes, and worker changes are rolled out out of order. Follow the documented infra -> migration -> API -> worker -> frontend sequence.
 - It is easy to underinvest in telemetry. If traces, logs, and alerts are not implemented alongside reminder delivery, production failures will be slow to diagnose.
+- The reminder stream is tightly ordered: ship schema and API intent first (`B021`), then queue scheduling and worker orchestration (`B022`), then provider delivery and notification-history fidelity (`B023`), then validate dashboards/alerts (`B024`), then lock release workflow and runbooks (`B025`).

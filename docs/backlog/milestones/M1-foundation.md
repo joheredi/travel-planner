@@ -60,6 +60,18 @@ Stand up the deployable product spine for Travel Planner so later feature milest
 - Azure deployment and CI/CD model from `docs/architecture/07-azure-deployment.md`
 - observability and testing expectations from `docs/architecture/08-observability-testing.md`
 
+## Hard foundation readiness for downstream milestones
+
+`M2` and later milestones should assume all of the following are already true before they start:
+
+- `packages/contracts` contains the baseline response envelopes, common error shapes, and the first shared DTO surface needed by auth, profile, and trip flows
+- Prisma migrations and local database bootstrap work reliably for `User`, `Trip`, and `TripMember`
+- Clerk session sync and `/v1/me` flows work end to end
+- trip CRUD works through the API and SPA, including owner membership creation and the architecture-required trip fields such as timezone and currency
+- API validation, error envelopes, OpenAPI generation, baseline logging, and request correlation are in place
+- CI runs install, lint, type-check, tests, build, Prisma validation, and Bicep validation
+- the shared `dev` environment can deploy the SPA and API, with the worker present as a healthy scaffold and Application Insights / Log Analytics ready for later telemetry
+
 ## Completion criteria
 
 - the repository boots locally with `web`, `api`, and `worker` running through Turborepo
